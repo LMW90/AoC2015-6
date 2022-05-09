@@ -15,8 +15,11 @@
 """
 TODO: read input for each line run startswith() to determine which function call
 and for which lights
-data structure could just be an array of dictionaries with "x", "y", "status" properties
+data structure could just be an array 
+of dictionaries with "x", "y", "status" properties
 """
+
+
 filename = "inputDay-6.txt"
 fhand = open(filename)
 print(fhand)
