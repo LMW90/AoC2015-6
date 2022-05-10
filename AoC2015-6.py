@@ -32,3 +32,20 @@ for i in range(0, 1000):
         lights.append([i, j , False])
 print(lights[999999])
 print(len(lights))
+filename = 'inputDay-6.txt'
+fhand = open(filename, 'r')
+textInput = ''
+for line in fhand:
+    textInput += line
+fhand.close()
+# print(textInput)
+# make it so first comma-separated pair of ints sets starting range for loops
+# (^)(\d+,\d+)*(\d+,+d+)
+# for line in textInput:
+    # regex.findall(line)
+    # if line.startswith('turn on'):
+        #  turn_on(groups[1], groups[2])
+    #  elif line.startswith('turn off'):
+    #     turn_off(groups[1], groups[2])
+    # else:
+    #     toggle(groups[1], groups[2])
