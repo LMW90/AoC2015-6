@@ -12,8 +12,6 @@ class Light:
         else:
             self.status = True
             
-    
-
 """
 TODO: read input for each line run startswith() 
 to determine which function call
