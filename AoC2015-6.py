@@ -32,40 +32,42 @@ lights = [tmp] * 1000
 # print(lights[5][300])
 filename = 'inputDay-6.txt'
 fhand = open(filename, 'r')
-textInput = ''
+coord = re.compile(r'\d{1,3},\d{1,3}')
 for line in fhand:
-    textInput += line
+    results = coord.findall(line)
+    # print(results)
+    startPoint = results[0]
+    endPoint = results[1]
+    # print(f'start point: {startPoint}')
+    # print(f'end point: {endPoint}')
+    startX = int(startPoint.split(",")[0])
+    startY = int(startPoint.split(",")[1])
+    endX = int(endPoint.split(",")[0]) + 1
+    endY = int(endPoint.split(",")[1]) + 1
+    # print(startX)
+    # print(startY)
+    # print(endX)
+    # print(endY)
+    if line.startswith("turn on"):
+        for i in range(startX, endX):
+            for j in range(startY, endY):
+                lights[i][j] = True
+    elif line.startswith("turn off"):
+         for i in range(startX, endX):
+            for j in range(startY, endY):       
+                lights[i][j] = False
+    elif line.startswith("toggle"):
+           for i in range(startX, endX):
+            for j in range(startY, endY):    
+                if lights[i][j] == False:
+                    lights[i][j] = True
+                else:
+                    lights[i][j] = False
 fhand.close()
-# print(textInput)
-coord = re.compile(r'''
-                   (\d{1,3})(\d{1,3}) # start coordinates group 1
-                   .*                  # anything in between
-                   (\d{1,3},\d{1,3}) # end coordinates group 2
-                   ''', re.VERBOSE)
-coord2 = re.compile(r'''
-                    .*(\d{,3})(.*)
-                    ''',re.X)
-result = coord2.match("toggle 916,242 through 926,786")
-print(result)
-print(result.group(1))
-print(result.group(2))
-# for line in textInput:
-#     if line.startswith("turn on"):
-#         lights[][2] = True
-#     elif line.startswith("turn off"):
-#         lights[][2] = False
-#     elif line.startswith("toggle"):
-#         if lights[][2] == False:
-#             lights[][2] = True
-#         else:
-#             lights[][2] = False
-# make it so first comma-separated pair of ints sets starting range for loops
-# (^)(\d+,\d+)*(\d+,+d+)
-# for line in textInput:
-    # regex.findall(line)
-    # if line.startswith('turn on'):
-        #  turn_on(groups[1], groups[2])
-    #  elif line.startswith('turn off'):
-    #     turn_off(groups[1], groups[2])
-    # else:
-    #     toggle(groups[1], groups[2])
+counter = 0
+for i in range(0, 1000):
+    for j in range(0, 1000):
+        if lights[i][j] == True:
+            counter += 1
+print(counter)
+
