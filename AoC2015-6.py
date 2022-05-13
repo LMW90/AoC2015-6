@@ -49,3 +49,52 @@ for y in range(0, 1000):
             counter += 1
 print(counter)
 
+# PART TWO
+
+# create and populate a list
+lights2 = [[0 for i in range(1000)] for j in range(1000)]
+# print(lights)
+# print(len(lights))
+# print(len(lights[0]))
+# print(lights[5][300])
+# load the input
+filename = 'inputDay-6.txt'
+fhand = open(filename, 'r')
+coord = re.compile(r'\d{1,3},\d{1,3}')
+for line in fhand:
+    results = coord.findall(line)
+    # print(results)
+    startPoint = results[0]
+    endPoint = results[1]
+    # print(f'start point: {startPoint}')
+    # print(f'end point: {endPoint}')
+    startX = int(startPoint.split(",")[0])
+    startY = int(startPoint.split(",")[1])
+    endX = int(endPoint.split(",")[0]) + 1
+    endY = int(endPoint.split(",")[1]) + 1
+    # print(startX)
+    # print(startY)
+    # print(endX)
+    # print(endY)
+    if line.startswith("turn on"):
+        for y in range(startX, endX):
+            for x in range(startY, endY):
+                lights2[y][x] += 1
+    elif line.startswith("turn off"):
+         for y in range(startX, endX):
+            for x in range(startY, endY):       
+                lights2[y][x] -= 1
+                if lights2[y][x] < 0:
+                    lights2[y][x] = 0
+    elif line.startswith("toggle"):
+           for y in range(startX, endX):
+            for x in range(startY, endY):    
+                lights2[y][x] += 2
+fhand.close()
+counter2 = 0
+for y in range(0, 1000):
+    for x in range(0, 1000):
+        counter2 += lights2[y][x]
+print(counter2)
+
+
